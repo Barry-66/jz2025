@@ -31,7 +31,29 @@
             padding: 0;
         }
         
-        body {
+        body 
+<script>
+// 解决微信缓存问题
+if(navigator.userAgent.match(/MicroMessenger/i)) {
+  if(!sessionStorage.getItem('refreshed')) {
+    sessionStorage.setItem('refreshed', '1');
+    location.reload(true); // 强制刷新
+  }
+}
+
+// 密码校验增强版
+const pwd = prompt("🔐 请输入直播获取的密码：");
+if(pwd !== "<动态密码>") { // 此处填当前场次密码
+  document.body.innerHTML = `
+    <div style="text-align:center;padding:50px">
+      <h1>⚠️ 访问未授权</h1>
+      <p>密码错误或已过期！</p>
+      <p>请返回直播间发送<span style="color:red">【系统BUG】</span>获取新链接</p>
+    </div>
+  `;
+}
+</script>
+{
             oncontextmenu="return false" 
   onselectstart="return false"
   ondragstart="return false"
