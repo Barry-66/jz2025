@@ -1,19 +1,102 @@
 <!DOCTYPE html>
-<!-- 密码锁代码开始 -->
-<script>
-  var pwd = prompt("🔒 请输入资料提取码：");
-  if (pwd != "2025jz") { 
-    alert("密码错误！请关注主播获取有效密码");
-    location.href = "about:blank"; // 跳转空白页
-  }
-</script>
-<!-- 密码锁代码结束 -->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025教师资格证报考学科规划系统（全国31省完整版）</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ================= 修复版密码锁 ================= -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 微信环境强制刷新
+        const isWechat = /MicroMessenger/i.test(navigator.userAgent);
+        if(isWechat && !sessionStorage.getItem('wxRefreshed')) {
+            sessionStorage.setItem('wxRefreshed', 'true');
+            location.reload(true);
+        }
+
+        // 严格密码验证
+        const LIVE_PWD = "2025jz"; // ★★★ 修改这里为当前密码 ★★★
+        const inputPwd = prompt("🔐 请输入直播间获取的密码：");
+        
+        if(inputPwd !== LIVE_PWD) {
+            // 彻底清空页面
+            document.documentElement.innerHTML = `
+            <!DOCTYPE html>
+            <html style="height:100%">
+            <head>
+                <title>访问被拒绝</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width,initial-scale=1">
+                <style>
+                    body { 
+                        background: #f8f9fa; 
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        margin: 0;
+                        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+                    }
+                    .container {
+                        text-align: center;
+                        padding: 2rem;
+                        max-width: 90%;
+                    }
+                    h1 { color: #e74c3c; }
+                    .btn {
+                        padding: 12px 24px;
+                        background: #3498db;
+                        color: white;
+                        border: none;
+                        border-radius: 6px;
+                        margin-top: 20px;
+                        cursor: pointer;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>⚠️ 密码验证失败</h1>
+                    <p>请确认：</p>
+                    <p>1. 是否使用最新密码（密码每小时更新）</p>
+                    <p>2. 是否在微信内打开（请用浏览器访问）</p>
+                    <button class="btn" onclick="location.reload()">重新输入密码</button>
+                </div>
+            </body>
+            </html>
+            `;
+        }
+    });
+
+    // 微信环境顶部警告条
+    window.onload = function() {
+        if(/MicroMessenger/i.test(navigator.userAgent)) {
+            const warningBar = document.createElement('div');
+            warningBar.innerHTML = `
+                <div style="
+                    background: linear-gradient(90deg, #d63031, #e74c3c);
+                    color: white;
+                    padding: 14px;
+                    text-align: center;
+                    font-weight: bold;
+                    position: sticky;
+                    top: 0;
+                    z-index: 9999;
+                ">
+                    ❗ 微信用户请点击右上角 → 「在浏览器打开」
+                </div>
+            `;
+            document.body.insertBefore(warningBar, document.body.firstChild);
+        }
+        
+        // 全局禁用右键和选择
+        document.body.oncontextmenu = () => false;
+        document.body.onselectstart = () => false;
+        document.body.ondragstart = () => false;
+    };
+    </script>
     <style>
         :root {
             --primary: #0066cc;
