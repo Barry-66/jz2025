@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!-- 密码锁代码开始 -->
+<script>
+  var pwd = prompt("🔒 请输入资料提取码：");
+  if (pwd != "2025jz") { 
+    alert("密码错误！请关注主播获取有效密码");
+    location.href = "about:blank"; // 跳转空白页
+  }
+</script>
+<!-- 密码锁代码结束 -->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +32,10 @@
         }
         
         body {
-            font-family: 'Segoe UI', '微软雅黑', 'PingFang SC', sans-serif;
+            oncontextmenu="return false" 
+  onselectstart="return false"
+  ondragstart="return false"
+font-family: 'Segoe UI', '微软雅黑', 'PingFang SC', sans-serif;
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
